@@ -6,15 +6,22 @@ function calcShipping(sum, min, shipping) {
     // Задание №2.1. Рассчитать доставку
 
     // создайте переменную shippingPrice
+    let shippingSum;
 
     // если productsSum равно 0,
     // то shippingPrice присвоить значение 0
+    if (productSum === 0 || productSum >= freeShippingMinSum) {
+        shippingSum = 0;
+    } 
 
     // если productsSum больше нуля, но меньше freeShippingMinSum,
     // то shippingPrice присвоить значение shipping
 
     // если productsSum > или равен freeShippingMinSum,
     // то shippingPrice присвоить значение 0
+    if (productSum > 0 && productSum < freeShippingMinSum) {
+        shippingSum = shipping;
+    }
 
     // Конец решения задания №2.1.
 
@@ -29,10 +36,16 @@ function calcDiscount(sum, min, discount) {
     // Задание №2.2. Рассчитать скидку
 
     // создайте переменную discountPrice
-
     // если productsSum больше или равно discountMinSum,
     // то присвойте discountPrice значение discountPart процентов от productsSum,
     // иначе присвойте discountPrice значения 0
+    let discountSum; 
+
+    if (productsSum >= discountMinSum) { 
+        discountSum = productsSum * discountPart / 100; 
+    } else {
+        discountSum = 0; 
+    }
 
     // Конец решения задания №2.2.
 
@@ -49,14 +62,21 @@ function calcInvoice({sum, discountMinSum, discountPart, shippingFreeMinSum, shi
 
     // присвойте totalSum значение productsSum
     // уменьшите totalSum на discountSum
+    let totalSum; 
+    totalSum = productsSum; 
+    totalSum = totalSum - discountSum;
+
 
     let shippingSum = calcShipping(totalSum, shippingFreeMinSum, shippingPrice); // не изменяйте эту строку!!!
 
     // прибавьте к totalSum значение shippingSum
+    totalSum = totalSum + shippingSum;
 
     // создайте переменную freeShipping
+    let freeShipping; 
     // запишите без использования if или любых других условий:
     // если shippingSum равно нулю, то freeShipping должна быть равна true, иначе freeShipping должна быть равна false
+    freeShipping = shippingSum == 0;
 
     // Конец решения задачи №2.3.
 
